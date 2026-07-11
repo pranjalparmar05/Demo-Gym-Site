@@ -1,0 +1,1230 @@
+/* --- Basic Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0c0c0c;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+.yellow-text {
+    color: #ffcc00;
+}
+
+/* --- FIXED NAVBAR STYLES --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 8%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0));
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.navbar nav ul {
+    display: flex;          /* Isse vertical list horizontal ho jayegi */
+    list-style: none;       /* Isse bullet points gayab ho jayenge */
+    gap: 35px;
+}
+
+.navbar nav ul li a {
+    color: #ffffff;         /* Links ka default blue color white ho jayega */
+    text-decoration: none;  /* Underline hatane ke liye */
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+/* Hover aur Active Effect */
+.navbar nav ul li a:hover, 
+.navbar nav ul li a.active {
+    color: #ffcc00 !important;
+    border-bottom: 2px solid #ffcc00;
+    padding-bottom: 4px;
+}
+
+/* --- HERO SECTION CONTAINER --- */
+.hero-section {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Slider Setup */
+.slider-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;       /* Image ko poori screen par fill karega */
+    background-position: center center; /* Image ka main center part dikhayega */
+    background-repeat: no-repeat;
+    transform: translateX(100%);
+    animation: slideLeft 9s infinite ease-in-out;
+}
+
+/* Background image par dark overlay taaki white font bilkul clear chamke */
+.slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+}
+
+/* Fallback/Placeholder colors jab tak aap images na lagayein */
+.slide1 { background-color: #111; animation-delay: 0s; }
+.slide2 { background-color: #222; animation-delay: 3s; }
+.slide3 { background-color: #1a1a1a; animation-delay: 6s; }
+
+/* Agar images hain toh unka path yahan sahi karein */
+
+.slide1 { background-image: url('../images/hero.jpg'); animation-delay: 0s; }
+.slide2 { background-image: url('../images/hero2.jpg'); animation-delay: 3s; }
+.slide3 { background-image: url('../images/hero3.jpg'); animation-delay: 6s; }
+
+
+/* --- FOREGROUND TEXT (BICH KA CONTENT WHITE) --- */
+.hero-content {
+    position: relative;
+    z-index: 10; 
+    max-width: 800px;
+}
+
+.hero-title {
+    color: #ffffff;          /* Beech ka main title pure white */
+    font-size: 5.5rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.9);
+}
+
+.hero-subtitle {
+    color: #ffffff;          /* Subtitle bhi pure white */
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
+    text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Button Fixes */
+.btn-join {
+    display: inline-block;
+    background-color: #ffcc00;
+    color: #000000;          /* Button text black */
+    text-decoration: none;
+    padding: 15px 45px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255, 204, 0, 0.4);
+}
+
+.btn-join:hover {
+    background-color: #e6b800;
+    transform: scale(1.05);
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 40px;
+    font-size: 1.5rem;
+    color: #ffffff;
+    animation: bounce 2s infinite;
+    opacity: 0.7;
+    z-index: 10;
+}
+
+/* Animations */
+@keyframes slideLeft {
+    0% { transform: translateX(100%); }
+    5%, 33.33% { transform: translateX(0%); }
+    38.33%, 100% { transform: translateX(-100%); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+/* HTML tag me smooth scroll behavior dalein */
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- ABOUT SECTION STYLES (SINGLE PAGE) --- */
+.about-section {
+    padding: 100px 0;
+    background-color: #0c0c0c;
+    width: 100vw;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-subtitle {
+    color: #ffcc00;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.about-story {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 80px;
+}
+
+.story-text {
+    flex: 1;
+}
+
+.story-text h2 {
+    font-size: 2.8rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.story-text p {
+    color: #aaaaaa;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.story-image {
+    flex: 1;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 400px;
+    background: #141414 url('../images/hero4.jpg') center/cover; /* Replace with your image */
+    border-radius: 8px;
+    border-left: 5px solid #ffcc00;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Stats Grid */
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.stat-card {
+    background-color: #141414;
+    padding: 40px 20px;
+    border-radius: 6px;
+    border: 1px solid #222;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: #ffcc00;
+    box-shadow: 0 5px 20px rgba(255, 204, 0, 0.1);
+}
+
+.stat-card h3 {
+    font-size: 3.2rem;
+    color: #ffcc00;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    color: #ffffff;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .about-story {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    .story-text h2 {
+        font-size: 2.2rem;
+    }
+}
+/* --- TRAINERS SECTION STYLES --- */
+.trainers-section {
+    padding: 100px 0;
+    background-color: #080808; /* thoda aur dark background contrast ke liye */
+    width: 100vw;
+}
+
+.trainers-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.section-header p {
+    color: #aaaaaa;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Trainers Grid Layout */
+.trainers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.trainer-card {
+    background-color: #111111;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #1a1a1a;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.trainer-card:hover {
+    transform: translateY(-10px);
+    border-color: #ffcc00;
+}
+
+/* Image Layer & Hover Social Media Setup */
+.trainer-img-container {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+}
+
+.trainer-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+/* Fallback Gray Color jab tak aap photos na lagayein */
+.trainer1 { background-color: #2a2a2a;  background-image: url('../images/trainer1.jpg'); }
+.trainer2 { background-color: #333333;  background-image: url('../images/trainer2.jpg'); }
+.trainer3 { background-color: #222222;  background-image: url('../images/trainer3.jpg');  }
+
+.trainer-card:hover .trainer-img {
+    transform: scale(1.08); /* Zoom effect on hover */
+}
+
+/* Smooth Social Icons Overlay */
+.trainer-socials {
+    position: absolute;
+    bottom: -60px; /* Shuruat me hidden rahega card ke niche */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
+    transition: bottom 0.3s ease;
+}
+
+.trainer-card:hover .trainer-socials {
+    bottom: 0; /* Hover karne par upar slide hoke dikhega */
+}
+
+.trainer-socials a {
+    width: 40px;
+    height: 40px;
+    background-color: #ffcc00;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.trainer-socials a:hover {
+    background-color: #ffffff;
+    transform: scale(1.1);
+}
+
+/* Trainer Info Section */
+.trainer-info {
+    padding: 25px;
+    text-align: center;
+}
+
+.trainer-tag {
+    color: #ffcc00;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.trainer-info h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.trainer-info p {
+    color: #888888;
+    font-size: 0.95rem;
+}
+/* --- PLANS SECTION STYLES --- */
+.plans-section {
+    padding: 100px 0;
+    background-color: #0c0c0c;
+    width: 100vw;
+}
+
+.plans-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.plans-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+/* Default Plan Card */
+.plan-card {
+    background-color: #111111;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 40px 30px;
+    width: 350px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+    border-color: #ffcc00;
+}
+
+/* Highlighted/Popular Plan Card Fixes */
+.plan-card.popular {
+    background-color: #151515;
+    border: 2px solid #ffcc00;
+    padding: 50px 30px; /* Thoda lamba aur bada dikhane ke liye */
+    box-shadow: 0 10px 30px rgba(255, 204, 0, 0.1);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffcc00;
+    color: #000000;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+
+/* Plan Header & Price */
+.plan-header h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.plan-card.popular .plan-header h3 {
+    color: #ffcc00; /* Popular content text highlights */
+}
+
+.price {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.price span:first-child {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffcc00;
+}
+
+.price span:last-child {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #aaaaaa;
+}
+
+/* Features List Styles */
+.plan-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 45px;
+}
+
+.plan-features li {
+    color: #dddddd;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.plan-features li i {
+    color: #ffcc00; /* Checkmarks are yellow */
+    font-size: 1rem;
+}
+
+/* Jo feature available nahi hai unka style change karein */
+.plan-features li.disabled {
+    color: #555555;
+    text-decoration: line-through;
+}
+
+.plan-features li.disabled i {
+    color: #555555;
+}
+
+/* Call To Action Buttons inside cards */
+.btn-plan {
+    display: block;
+    width: 100%;
+    padding: 13px 0;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-plan:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Yellow Button for Popular Plan */
+.btn-yellow {
+    background-color: #ffcc00;
+    border-color: #ffcc00;
+    color: #000000;
+}
+
+.btn-yellow:hover {
+    background-color: transparent;
+    color: #ffcc00;
+    border-color: #ffcc00;
+}
+
+/* Responsive Grid for Smaller Screens */
+@media (max-width: 768px) {
+    .plan-card.popular {
+        padding: 40px 30px;
+    }
+}
+
+/* --- CONTACT SECTION STYLES --- */
+.contact-section {
+    padding: 100px 0;
+    background-color: #080808; /* thoda deep contrast background */
+    width: 100vw;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.contact-wrapper {
+    display: flex;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+/* Left Side: Contact Info & Map */
+.contact-info {
+    flex: 1;
+    background-color: #111111;
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid #1a1a1a;
+}
+
+.contact-info h3, .contact-form-container h3 {
+    font-size: 1.6rem;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-weight: 800;
+    position: relative;
+}
+
+/* Headline ke niche modern yellow underline choti si */
+.contact-info h3::after, .contact-form-container h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #ffcc00;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.info-item i {
+    color: #ffcc00;
+    font-size: 1.3rem;
+    margin-top: 3px;
+}
+
+.info-item p {
+    color: #cccccc;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.map-box {
+    width: 100%;
+    height: 180px;
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #555555;
+    border: 1px dashed #333;
+    margin-top: 30px;
+}
+
+/* Right Side: Modern Dark Form */
+.contact-form-container {
+    flex: 1.2;
+    background-color: #111111;
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid #1a1a1a;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group input, .input-group textarea {
+    width: 100%;
+    background-color: #1a1a1a;
+    border: 1px solid #252525;
+    padding: 15px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Focus hone par yellow border chamkegi */
+.input-group input:focus, .input-group textarea:focus {
+    outline: none;
+    border-color: #ffcc00;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.1);
+}
+
+.btn-submit {
+    background-color: #ffcc00;
+    color: #000000;
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #e6b800;
+    transform: translateY(-2px);
+}
+
+/* --- FOOTER STYLES --- */
+.main-footer {
+    background-color: #050505;
+    padding: 30px 0;
+    border-top: 1px solid #111;
+    width: 100vw;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #666666;
+    font-size: 0.9rem;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-socials a {
+    color: #666666;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.footer-socials a:hover {
+    color: #ffcc00;
+}
+
+/* Responsive Grid for Form & Info */
+@media (max-width: 900px) {
+    .contact-wrapper {
+        flex-direction: column;
+    }
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+/* ==========================================================================
+   MODERN RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+
+/* --- 1. LAPTOPS & TABLETS (Max-width: 1024px) --- */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 20px 5%;
+    }
+
+    .hero-title {
+        font-size: 4.5rem;
+    }
+
+    .about-story {
+        gap: 40px;
+    }
+
+    .story-text h2, .section-header h2 {
+        font-size: 2.4rem;
+    }
+
+    .trainers-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+    .contact-wrapper {
+        gap: 30px;
+    }
+}
+
+/* --- 2. TABLETS & LARGE PHONES (Max-width: 768px) --- */
+@media (max-width: 768px) {
+    /* Navbar ko stack (vertical) karne ke liye */
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 2%;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.95); /* Mobile par clear visibility */
+        position: relative; /* Fixed se hata kar normal flow me */
+    }
+
+    .navbar nav ul {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar nav ul li a {
+        font-size: 0.9rem;
+    }
+
+    /* Hero Section Reset */
+    .hero-section {
+        height: calc(100vh - 120px); /* Navbar ki height minus ki */
+    }
+
+    .hero-title {
+        font-size: 3.2rem;
+        letter-spacing: 2px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.4rem;
+        margin-bottom: 25px;
+    }
+
+    /* About Section Mobile Fix */
+    .about-section {
+        padding: 60px 0;
+    }
+
+    .about-story {
+        flex-direction: column; /* Image niche aur Text upar chala jayega */
+        text-align: center;
+        gap: 30px;
+    }
+
+    .story-image {
+        width: 100%;
+    }
+
+    .image-placeholder {
+        height: 280px;
+        border-left: none;
+        border-top: 5px solid #ffcc00; /* Modern top border for mobile */
+    }
+
+    /* Plans Grid Reset */
+    .plans-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .plan-card {
+        width: 100%;
+        max-width: 380px;
+    }
+
+    .plan-card.popular {
+        padding: 40px 30px; /* Mobile par thoda adjust kiya padding */
+        transform: scale(1.02);
+    }
+
+    /* Contact Section Layout Change */
+    .contact-wrapper {
+        flex-direction: column; /* Form aur Info ek ke niche ek aane lagenge */
+    }
+
+    .contact-info, .contact-form-container {
+        padding: 30px 20px;
+    }
+
+    /* Footer Center Text */
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+/* --- 3. SMALL MOBILE PHONES (Max-width: 480px) --- */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .btn-join {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+
+    .story-text h2, .section-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .stat-card h3 {
+        font-size: 2.5rem;
+    }
+
+    .price {
+        font-size: 2.8rem;
+    }
+
+    .contact-info h3, .contact-form-container h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Mobile background fix */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 100vh !important;
+        width: 100vw !important;
+    }
+
+    .slide {
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+
+    /* Mobile ke liye unhi 3 slides par alag lambi images link karein */
+    .slide1 {
+        background-image: url('../images/hero.jpg') !important;
+    }
+    
+    .slide2 {
+        background-image: url('../images/hero2.jpg') !important;
+    }
+    
+    .slide3 {
+        background-image: url('../images/hero3.jpg') !important;
+    }
+}
+
+/* By default toggle button hidden rahega desktop par */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.menu-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    /* Navbar fixed rahegi aur relative boundary banayegi */
+    .navbar {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 25px !important;
+        position: fixed !important;
+        width: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        background: #000000 !important;
+        z-index: 1000 !important;
+        height: 70px !important; /* Fixed height for navbar */
+    }
+
+    .logo {
+        text-align: left !important;
+    }
+
+    /* Toggle button ki positioning */
+    .menu-toggle {
+       display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important; /* Lines ko vertical center karega */
+        align-items: center !important;     /* Lines ko horizontal center karega */
+        cursor: pointer !important;
+        height: 100% !important;            /* Navbar ki poori height lega taaki center mile */
+        margin-left: auto !important;       /* Isse ye automatic right side me push ho jayega */
+        padding-right: 5px !important;      /* Right corner se halki si saaf doori */
+        z-index: 1002 !important;
+    }
+
+    /* 📌 Yeh hai aapka chota Box Menu (Jo sirf aapke mark kiye area me khulega) */
+    .navbar nav ul {
+        display: none !important; /* Default me hidden */
+        flex-direction: column !important;
+        position: absolute !important; /* Navbar ke relative khulega */
+        top: 70px !important; /* Navbar ke theek neeche se shuru hoga */
+        right: 0 !important; /* Right side se chipka rahega */
+        width: 150px !important; /* Choti aur controlled width (Aapke box jitni) */
+        background-color: rgba(0, 0, 0, 0.95) !important; /* Transparent Black */
+        padding: 10px 0 !important; 
+        text-align: center !important;
+        border-bottom: 2px solid #ffcc00 !important;
+        border-left: 2px solid #ffcc00 !important; /* Box feel dene ke liye side border */
+        border-bottom-left-radius: 8px !important; /* Corners smoothly round karne ke liye */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5) !important;
+        z-index: 1001 !important;
+    }
+
+    /* 🌟 Jab toggle par click hoga tab sirf chota box dikhega */
+    .navbar nav ul.active {
+        display: flex !important;
+    }
+
+    /* Chote box ke andar ke links ki styling */
+    .navbar nav ul li {
+        margin: 0 !important;
+        width: 100% !important;
+        list-style: none !important;
+    }
+
+    .navbar nav ul li a {
+        font-size: 0.95rem !important; /* Mobile friendly thoda chota font */
+        padding: 12px 0 !important;
+        display: block !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        width: 100% !important;
+        transition: background 0.2s ease !important;
+    }
+
+    /* Link par touch karne par yellow highlight effect */
+    .navbar nav ul li a:hover,
+    .navbar nav ul li a:active {
+        background-color: #ffcc00 !important;
+        color: #000000 !important;
+    }
+}
+
+/* Modals Overlay (Background black blur) */
+.modal-overlay {
+    display: none; /* Default me hidden */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 2000; /* Sabse upar */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Central Popup Box */
+.modal-box {
+    background: #111111;
+    padding: 35px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 360px;
+    border-top: 4px solid #ffcc00;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.8);
+    position: relative;
+    color: white;
+}
+
+.modal-box h2 {
+    color: #ffcc00;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Close (X) Button */
+.close-modal {
+    position: absolute;
+    top: 15px; right: 20px;
+    color: #888;
+    font-size: 30px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.close-modal:hover { color: #ffcc00; }
+
+/* Form Elements Styling */
+.modal-box form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+.modal-box input {
+    padding: 10px;
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+.modal-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ffcc00;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.modal-switch {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+.modal-switch a { color: #ffcc00; text-decoration: none; }
+
+/* Desktop view par menu links dikhne chahiye */
+.navbar nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+/* 📌 Theme Color Rules */
+:root {
+    --bg-color: #0c0c0c;
+    --card-bg: #111111;
+    --text-color: #ffffff;
+    --text-muted: #aaaaaa;
+}
+
+[data-theme="light"] {
+    --bg-color: #f5f5f5;
+    --card-bg: #ffffff;
+    --text-color: #111111;
+    --text-muted: #555555;
+}
+
+/* 📌 AB YEH SABSE ZAROORI HAI: Puraane elements par variables lagana */
+body, html {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    transition: all 0.3s ease;
+}
+
+/* Aapke Gym ke saare sections (Hero, About, Contact) ka background badlein */
+section, .about-section, .contact-section, .services-section {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Cards aur Forms ka background badlein */
+.plan-card, .trainer-card, .contact-form-container, .signup-card, .login-card {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--text-muted);
+}
+
+/* Paragraph aur Heading ke text colors */
+p, span {
+    color: var(--text-muted) !important;
+}
+h1, h2, h3, h4 {
+    color: var(--text-color) !important;
+}
+
+/* 📌 Sabhi CHOOSE PLAN buttons ka default design fix */
+.btn-plan {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    font-weight: bold !important;
+    font-size: 1rem !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    
+    /* 🎨 DEFAULT LOOK: White background aur Black text taaki dark theme me chamke */
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* 📌 PREMIUM wale card ka button alag se Yellow dikhna chahiye */
+.btn-plan.btn-yellow {
+    background-color: #ffcc00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffcc00 !important;
+}
+
+/* 🎯 HOVER EFFECT: Jab mouse lekar jayein toh kya badlaav ho */
+.btn-plan:hover {
+    background-color: transparent !important;
+    color: #ffcc00 !important; /* Text yellow ho jayega */
+    border: 2px solid #ffcc00 !important; /* Border yellow ho jayega */
+}
+
+/* Premium button ka hover thoda alag aur stylish look ke liye */
+.btn-plan.btn-yellow:hover {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}

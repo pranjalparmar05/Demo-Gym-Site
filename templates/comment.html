@@ -1,0 +1,32 @@
+<div id="comment-modal-{{ post.id }}" style="position: fixed; bottom: -100%; left: 0; width: 100%; height: 80vh; background: #121212; border-radius: 20px 20px 0 0; transition: bottom 0.4s ease; z-index: 999999; display: flex; flex-direction: column;">
+    
+    <div style="padding: 15px; text-align: center; border-bottom: 1px solid #262626;">
+        <div style="width: 40px; height: 5px; background: #444; margin: 0 auto 10px; border-radius: 10px;"></div>
+        <span style="font-weight: bold;">Comments</span>
+        <button onclick="closeComments('{{ post.id }}')" style="position:absolute; right:15px; background:none; border:none; color:#fff; font-size:1.2rem;">&times;</button>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto; padding: 15px;">
+        {% for c in post.comments.all %}
+            <div style="margin-bottom: 15px;">
+                <strong style="color: #ffcc00; font-size: 0.85rem;">@{{ c.user.username }}</strong>
+                <p style="margin: 2px 0; font-size: 0.9rem; color: #ccc;">{{ c.comment_text }}</p>
+            </div>
+        {% empty %}
+            <p style="text-align: center; color: #555; margin-top: 20px;">No comments yet.</p>
+        {% endfor %}
+    </div>
+
+    <form method="POST" action="{% url 'add_comment' post.id %}" 
+      style="padding: 15px; border-top: 1px solid #262626; background: #121212; display: flex; align-items: center; gap: 10px;">
+    {% csrf_token %}
+    
+    <input type="text" name="comment_text" placeholder="Add a comment..." required 
+           style="flex: 1; padding: 12px; background: #1a1a1a; border: none; border-radius: 25px; color: #fff;">
+    
+    <button type="submit" 
+            style="background: #ffcc00; color: #000; border: none; padding: 10px 15px; border-radius: 50%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+        <i class="fas fa-paper-plane"></i>
+    </button>
+</form>
+</div>

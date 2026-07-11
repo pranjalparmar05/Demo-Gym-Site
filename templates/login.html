@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="background: #0c0c0c; min-height: 80vh; display: flex; justify-content: center; align-items: center; color: white;">
+    <div style="background: #111; padding: 40px; border-radius: 8px; border-top: 4px solid #ffcc00; width: 100%; max-width: 350px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+        <h2 style="text-align: center; color: #ffcc00; margin-bottom: 20px;">MEMBER LOGIN</h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <input type="hidden" name="next" value="{{ next }}">
+            
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                {{ form.as_p }}
+            </div>
+            
+            <button type="submit" style="width: 100%; padding: 12px; background: #ffcc00; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 20px;">
+                LOGIN
+            </button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: #aaa;">
+            New to Gym? <a href="{% url 'signup' %}" style="color: #ffcc00; text-decoration: none;">Register Here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

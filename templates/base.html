@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" style="background-color: #000000 !important;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Power Gym{% endblock %}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* 🖤 ULTRA-BLACKOUT ROOT RESET */
+        html, body {
+            background: #000000 !important;
+            background-color: #000000 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            min-height: 100vh !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Navbar aur Main ke beech ka pixel gap khatam karne ke liye padding reset */
+        header, .navbar, main, div, nav, ul, li, a {
+            border: none !important;
+            border-bottom: none !important;
+            border-top: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            text-decoration: none !important;
+        }
+
+        /* Sabhi elements ki border colors ko default gayab karo */
+        * {
+            border-color: transparent !important;
+            box-shadow: none !important;
+        }
+        .menu-toggle {
+    display: none !important;
+}
+
+/* 📱 Mobile screen (max-width: 768px) par hamburger dikhega aur right align hoga */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: flex !important;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 5px;
+        margin-right: -5px;
+        z-index: 1000;
+    }
+}
+    </style>
+</head>
+<body style="background-color: #000000 !important; background: #000000 !important; margin: 0; padding: 0;">
+
+<header class="navbar" style="background-color: #000000; background: #000000; border: none; margin-bottom: 0; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; position: relative; width: 100%; box-sizing: border-box;">
+    
+    <div class="logo" style="background: transparent; margin: 0; padding: 0;">
+        <h2 style="margin: 0; font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: 0.5px;">POWER <span style="color: #ffcc00;">GYM</span></h2>
+    </div>
+    
+    <div class="menu-toggle" id="mobile-menu" style="cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 5px; margin-right: -5px; z-index: 1000;">
+        <span class="bar" style="display: block; width: 25px; height: 3px; background-color: #ffffff; transition: all 0.3s ease; border-radius: 2px;"></span>
+        <span class="bar" style="display: block; width: 25px; height: 3px; background-color: #ffffff; transition: all 0.3s ease; border-radius: 2px;"></span>
+        <span class="bar" style="display: block; width: 25px; height: 3px; background-color: #ffffff; transition: all 0.3s ease; border-radius: 2px;"></span>
+    </div>
+
+    <nav style="background: transparent;">
+        <ul id="nav-links" style="background: transparent;">
+            <li><a href="{% url 'home' %}#home">Home</a></li>
+            <li><a href="{% url 'home' %}#about">About</a></li>
+            <li><a href="{% url 'home' %}#trainers">Trainers</a></li>
+            <li><a href="{% url 'home' %}#plans">Plans</a></li>
+            <li><a href="{% url 'home' %}#contact">Contact</a></li>
+
+    
+            
+            {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'profile' %}" style="color: #ffcc00; font-weight: bold;">👤 Profile</a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}" style="color: #ff4444;">Logout</a>
+                </li> 
+            {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main style="background-color: #000000 !important; background: #000000 !important; border: none !important; margin-top: 0 !important; padding-top: 0 !important;">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<style>
+    /* Premium Floating Bottom Navbar */
+    .bottom-nav {
+        position: fixed;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 400px;
+        background: rgba(20, 20, 20, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 25px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        z-index: 9999;
+    }
+
+    .nav-item {
+        color: #fff;
+        font-size: 22px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .nav-item:hover { color: #ffcc00; }
+
+    .add-btn {
+        background: #ffcc00;
+        color: #000;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
+    }
+</style>
+
+{% include 'footer.html' %}
+
+<script>
+    
+    document.getElementById('openModalBtn').addEventListener('click', function() {
+    {% if not user.is_authenticated %}
+        window.location.href = "{% url 'login' %}"; // Login page par bhej do
+    {% else %}
+        // Modal kholne ka logic
+        document.getElementById('myModal').style.display = 'block';
+    {% endif %}
+});
+</script>
+
+</body>
+</html>

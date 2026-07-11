@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #000000 !important; margin: 0; padding: 0;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Chat | @{{ other_user.username }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        html, body {
+            background-color: #000000 !important;
+            background: #000000 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100vh !important;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        /* Custom scrollbar for chat log */
+        #chat-log::-webkit-scrollbar {
+            width: 4px;
+        }
+        #chat-log::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div style="max-width: 600px; margin: 0 auto; background: #000000; height: 100vh; display: flex; flex-direction: column; position: relative;">
+    
+    <div style="display: flex; align-items: center; gap: 15px; padding: 15px; border-bottom: 1px solid #111; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 10;">
+        <a href="/user/{{ other_user.username }}/" style="text-decoration: none; color: #aaa; font-size: 1.1rem; font-weight: bold;">←</a>
+        <div>
+            <h3 style="margin: 0; font-size: 1rem; font-weight: 600; color: #fff;">@{{ other_user.username }}</h3>
+            <span style="font-size: 0.7rem; color: #ffcc00; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">● Matrix Athlete</span>
+        </div>
+    </div>
+
+    <div id="chat-log" style="flex: 1; overflow-y: auto; padding: 20px 15px; display: flex; flex-direction: column; gap: 12px; background: #000000;">
+        
+        {% for msg in chat_messages %}
+            {% if msg.sender == request.user %}
+                <div style="align-self: flex-end; max-width: 75%; background: #ffcc00; color: #000; padding: 10px 14px; border-radius: 16px 16px 2px 16px; font-size: 0.85rem; line-height: 1.4; font-weight: 500;">
+                    {{ msg.message_text }}
+                    <span style="display: block; font-size: 0.65rem; text-align: right; margin-top: 4px; color: #444;">{{ msg.timestamp|date:"H:i" }}</span>
+                </div>
+            {% else %}
+                <div style="align-self: flex-start; max-width: 75%; background: #1c1c1e; color: #fff; border: 1px solid #262626; padding: 10px 14px; border-radius: 16px 16px 16px 2px; font-size: 0.85rem; line-height: 1.4;">
+                    {{ msg.message_text }}
+                    <span style="display: block; font-size: 0.65rem; color: #666; margin-top: 4px;">{{ msg.timestamp|date:"H:i" }}</span>
+                </div>
+            {% endif %}
+        {% empty %}
+            <div id="empty-chat" style="text-align: center; color: #444; margin-top: auto; margin-bottom: auto; font-size: 0.85rem;">
+                <p style="margin: 0;">No messages yet.<br>Start the shredding motivation talk! 🔥</p>
+            </div>
+        {% endfor %}
+        
+    </div>
+
+    <form id="chat-form" style="padding: 15px; background: #000000; border-top: 1px solid #111; display: flex; gap: 10px; margin: 0; align-items: center;">
+        {% csrf_token %}
+        <input type="text" id="msg-input" name="message_text" placeholder="Type a message..." required autocomplete="off" style="flex: 1; background: #121212; border: 1px solid #1c1c1e; border-radius: 25px; padding: 12px 18px; color: #fff; font-size: 0.85rem; outline: none; transition: border 0.2s;" onfocus="this.style.borderColor='#ffcc00'" onblur="this.style.borderColor='#1c1c1e'">
+        <button type="submit" style="background: #ffcc00; color: #000; border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; font-size: 1rem; transition: transform 0.1s;" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='none'">
+            ➔
+        </button>
+    </form>
+
+</div>
+
+<script>
+    const chatLog = document.getElementById('chat-log');
+    
+    // Chat open hote hi screen ko auto-scroll karke sabse niche le jana
+    chatLog.scrollTop = chatLog.scrollHeight;
+
+    // Instant/AJAX message submission system
+    document.getElementById('chat-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const input = document.getElementById('msg-input');
+        const messageText = input.value.strip ? input.value.strip() : input.value.trim();
+        if(!messageText) return;
+
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const formData = new FormData();
+        formData.append('message_text', messageText);
+
+        // Input ko instant clear karo seamless experience ke liye
+        input.value = '';
+
+        // Empty text placeholder text ko instant gayab karne ke liye
+        const emptyChatDiv = document.getElementById('empty-chat');
+        if(emptyChatDiv) emptyChatDiv.style.display = 'none';
+
+        // Background fetch call to views.py
+        fetch(window.location.href, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': csrfToken
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+                // UI mein naya chat bubble add karna
+                const userBubble = `
+                    <div style="align-self: flex-end; max-width: 75%; background: #ffcc00; color: #000; padding: 10px 14px; border-radius: 16px 16px 2px 16px; font-size: 0.85rem; line-height: 1.4; font-weight: 500;">
+                        ${data.message}
+                        <span style="display: block; font-size: 0.65rem; text-align: right; margin-top: 4px; color: #444;">${data.timestamp}</span>
+                    </div>
+                `;
+                chatLog.innerHTML += userBubble;
+                
+                // Naya message aate hi smooth scroll up down automatic ho jayega
+                chatLog.scrollTop = chatLog.scrollHeight;
+            } else {
+                alert("Message failed to send!");
+            }
+        })
+        .catch(err => {
+            console.error("Chat box error:", err);
+            alert("Connection error!");
+        });
+    });
+
+   
+    let lastId = 0; // Sabse latest message ka ID
+    const username = "{{ other_user.username }}";
+
+    function fetchNewMessages() {
+        fetch(`/get-new-messages/${username}/?last_id=${lastId}`)
+        .then(response => response.json())
+        .then(data => {
+            data.messages.forEach(msg => {
+                // Naye message ko chat box mein append karo
+                const chatBox = document.getElementById('chat-box');
+                chatBox.innerHTML += `<div class="msg">${msg.text}</div>`;
+                lastId = msg.id; // ID update karo
+            });
+        });
+    }
+
+    // Har 3 second mein function chalega
+    setInterval(fetchNewMessages, 3000);
+</script>
+</body>
+</html>

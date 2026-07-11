@@ -1,0 +1,72 @@
+<style>
+    body {
+        background-color: #000000 !important;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+</style>
+<div style="max-width: 600px; margin: 0 auto; background: #000; min-height: 100vh; font-family: 'Poppins', sans-serif;">
+    <div style="padding: 20px; border-bottom: 1px solid #111; display: flex; align-items: center; gap: 15px;">
+        <a href="/" style="color: #fff; text-decoration: none; font-size: 1.2rem;">←</a>
+        <h2 style="color: #fff; margin: 0; font-size: 1.2rem;">Messages</h2>
+    </div>
+
+    {% for chat in chat_list %}
+    <a href="/chat/{{ chat.other_user.username }}/" style="display: flex; align-items: center; padding: 15px 20px; text-decoration: none; border-bottom: 1px solid #000000; transition: background 0.2s;" onmouseover="this.style.background='#4b3838'" onmouseout="this.style.background='transparent'">
+      <div style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; overflow: hidden; background: #222; display: flex; align-items: center; justify-content: center;">
+    {% if chat.profile_pic %}
+        <img src="{{ chat.profile_pic }}" style="width: 100%; height: 100%; object-fit: cover;">
+    {% else %}
+        <span style="color: #ffcc00; font-weight: bold; font-size: 1.2rem;">
+            {{ chat.other_user.username|slice:":1"|upper }}
+        </span>
+    {% endif %}
+</div>
+        
+       <div style="flex: 1; overflow: hidden;">
+    <div style="color: #fff; font-weight: 600; font-size: 0.95rem;">{{ chat.other_user.username }}</div>
+    <div style="color: #666; font-size: 0.8rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">
+        {% if chat.last_message_sender == request.user %}You: {% endif %}{{ chat.last_message }}
+    </div>
+</div>
+
+        {% if chat.unread_count > 0 %}
+        <div style="background: #ff4444; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold;">
+            {{ chat.unread_count }}
+        </div>
+        {% endif %}
+    </a>
+    {% empty %}
+        <div style="text-align: center; color: #444; margin-top: 50px;">
+            <p>No conversations found.</p>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    let lastMessageId = {{ last_message_id }}; // Page load hote waqt last message ki ID pass karo
+
+    function fetchNewMessages() {
+        fetch(`/get-messages/{{ conversation.id }}/?last_id=${lastMessageId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.messages.length > 0) {
+                    data.messages.forEach(msg => {
+                        // Naye message ko UI mein append karo
+                        const chatBox = document.getElementById('chat-box');
+                        chatBox.innerHTML += `<div class="message"><b>${msg.sender}:</b> ${msg.text}</div>`;
+                        
+                        // Scroll down karo
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                        
+                        // lastMessageId update karo (ye tumhein backend se milni chahiye)
+                        lastMessageId = msg.id; 
+                    });
+                }
+            });
+    }
+
+    // Har 3 second mein function chalao
+    setInterval(fetchNewMessages, 3000); 
+</script>

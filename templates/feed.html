@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #000000 !important; margin: 0; padding: 0;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discipline Matrix | Feed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        html, body {
+            background-color: #000000 !important;
+            background: #000000 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            min-height: 100vh !important;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div style="background:#000000; min-height:100vh;   padding-bottom:80px;  color:#fff;">
+    
+    <div style="max-width:600px; margin:0 auto; padding: 15px; position: sticky; top: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid #111; z-index: 100; display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #ffcc00; letter-spacing: 0.5px;">🔥 MATRIX FEED</h2>
+    </div>
+
+    <div style="max-width:600px; margin: 0 auto; padding: 10px 15px; display: flex; flex-direction: column; gap: 20px;">
+        
+        {% for post in posts %}
+         {% include 'comment.html' %}
+         
+            <div style="background: #121212; border: 1px solid #1c1c1e; border-radius: 12px; overflow: hidden;">
+                
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px;">
+                    {% if post.user.profile.profile_pic %}
+                        <img src="{{ post.user.profile.profile_pic.url }}" style="width:35px; height:35px; border-radius:50%; object-fit:cover; border: 1px solid #ffcc00;">
+                    {% else %}
+                        <div style="width:35px; height:35px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; color:#ffcc00; border:1px solid #ffcc00; font-weight:bold;">
+                            {{ post.user.username|slice:":1"|upper }}
+                        </div>
+                    {% endif %}
+                    
+                    <div style="flex: 1;">
+                        <a href="/user/{{ post.user.username }}/" style="text-decoration: none; color: #fff; font-weight: 600; font-size: 0.85rem;">
+                            @{{ post.user.username }}
+                        </a>
+                        <span style="color: #666; font-size: 0.7rem; display: block;">{{ post.created_at|date:"d M, Y" }}</span>
+                    </div>
+                </div>
+
+                <!-- Height ko 300px ya 350px kar dein, jitna aapko chota chahiye -->
+<div style="width: 100%; height: 300px; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+    <img src="{{ post.image.url }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+</div>
+                <div style="padding: 12px 15px; display: flex; flex-direction: column; gap: 8px;">
+                    
+                   <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0;"> 
+    {% csrf_token %} 
+
+    <button onclick="likeFeedPost(this, '{{ post.id }}')" 
+            data-liked="{% if request.user in post.likes.all %}true{% else %}false{% endif %}" 
+            style="background: #1c1c1e; border: none; padding: 8px 14px; border-radius: 20px; color: #fff; font-size: 0.8rem; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 6px;">
+        <i class="fas fa-heart heart-icon" style="color: {% if request.user in post.likes.all %}red{% else %}white{% endif %};"></i>
+        <span class="like-count" style="color: #ffcc00;">{{ post.likes.count }}</span>
+    </button>
+
+    <button onclick="openComments('{{ post.id }}')" 
+            style="background: #262626; border: none; padding: 8px 16px; border-radius: 20px; color: #ffcc00; font-size: 0.8rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+        <i class="fas fa-comment"></i> Comment
+    </button>
+</div>
+
+                    {% if post.caption %}
+                     
+                        <div style="font-size: 0.85rem; color: #ddd; line-height: 1.4;">
+                            <strong style="color: #ffcc00;">@{{ post.user.username }}</strong> {{ post.caption }}
+                        </div>
+                    {% endif %}
+
+                    <div class="comment-preview-section" style="display: none;">
+                        {% for c in post.comments.all %}
+                            <div style="font-size: 0.78rem; margin-bottom: 4px;">
+                                <strong style="color: #ffcc00;">@{{ c.user.username }}:</strong> <span style="color: #ccc;">{{ c.comment_text }}</span>
+                            </div>
+                        {% empty %}
+                            <p style="color: #444; font-size: 0.75rem; margin: 0;">No comments yet.</p>
+                        {% endfor %}
+                    </div>
+
+                   
+
+                </div>
+            </div>
+        {% empty %}
+            <div style="text-align: center; padding: 100px 20px; color: #555;">
+                <p style="margin: 0; font-size: 0.9rem;">No Matrix Posts Available.</p>
+            </div>
+        {% endfor %}
+
+    </div>
+
+   {% include 'footer.html' %}
+
+</div>
+
+<script>
+function likeFeedPost(btnElement, postId) {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const isLiked = btnElement.getAttribute('data-liked') === 'true';
+    const countSpan = btnElement.querySelector('.like-count');
+    const heartIcon = btnElement.querySelector('.heart-icon'); // Yeh line zaruri hai
+
+    fetch(`/post/${postId}/like/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken,
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'ok') {
+            countSpan.innerText = data.likes_count;
+            const newLikedState = !isLiked;
+            btnElement.setAttribute('data-liked', newLikedState.toString());
+            
+            // Icon color change
+            heartIcon.style.color = newLikedState ? 'red' : 'white';
+            // Button background toggle
+            btnElement.style.backgroundColor = newLikedState ? '#330000' : '#1c1c1e';
+        }
+    })
+    .catch(err => console.error("Error:", err));
+}
+function openComments(postId) {
+    // 1. Modal open karo
+    const modal = document.getElementById('comment-modal-' + postId);
+    if (modal) {
+        modal.style.bottom = "0";
+        modal.style.visibility = "visible";
+    }
+
+    // 2. Footer (Navbar) ko hide karo
+    const footer = document.querySelector('.bottom-nav');
+    if (footer) {
+        footer.style.display = "none";
+    }
+}
+
+
+function closeComments(postId) {
+    // 1. Modal close karo
+    const modal = document.getElementById('comment-modal-' + postId);
+    if (modal) {
+        modal.style.bottom = "-100%";
+        modal.style.visibility = "hidden";
+    }
+
+    // 2. Footer (Navbar) ko wapas lao
+    const footer = document.querySelector('.bottom-nav');
+    if (footer) {
+        footer.style.display = "flex"; // Kyunki hamne navbar ko flex rakha tha
+    }
+}
+
+function toggleLike(postId, btnElement, countElementId) {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+    fetch(`/post/${postId}/like/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken,
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'ok') {
+            // Count update karo
+            const countSpan = document.getElementById(countElementId);
+            if(countSpan) countSpan.innerText = data.likes_count + ' Likes';
+            
+            // Color toggle (Like = Red, Unlike = White)
+            btnElement.style.color = (data.action === 'liked') ? '#ff0000' : '#fff';
+        }
+    })
+    .catch(err => console.error("Error:", err));
+}
+</script>
+</body>
+</html>

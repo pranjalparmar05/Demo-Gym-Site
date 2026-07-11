@@ -1,0 +1,21 @@
+<div style="color: #fff; padding: 20px;">
+    <h3>Notifications</h3>
+    
+    {% for follow in follows %}
+    <div style="padding: 10px; border-bottom: 1px solid #333;">
+        👤 {{ follow.follower.username }} started following you.
+    </div>
+    {% endfor %}
+
+    {% for like in likes %}
+    <div style="padding: 10px; border-bottom: 1px solid #333;">
+        ❤️ {{ like.user.username }} liked your post.
+    </div>
+    {% endfor %}
+
+    {% for comment in comments %}
+    <div style="padding: 10px; border-bottom: 1px solid #333;">
+        💬 {{ comment.user.username }} commented: "{{ comment.comment_text }}"
+    </div>
+    {% endfor %}
+</div>

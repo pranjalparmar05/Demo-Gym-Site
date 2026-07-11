@@ -1,0 +1,456 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- 1. HERO SECTION -->
+<section id="home" class="hero-section">
+    <div class="slider-container">
+        <div class="slide slide1"></div>
+        <div class="slide slide2"></div>
+        <div class="slide slide3"></div>
+    </div>
+
+    <div class="hero-content">
+        <h1 class="hero-title">POWER GYM</h1>
+        <p class="hero-subtitle">Build Your Dream Body</p>
+        <a href="#about" class="btn-join">JOIN NOW</a>
+    </div>
+    
+    <a href="#about" class="scroll-down">
+        <i class="fa-solid fa-angles-down"></i>
+    </a>
+</section>
+
+<!-- 2. ABOUT SECTION (Niche Scroll Hoke Aane Wala) -->
+<section id="about" class="about-section">
+    <div class="about-container">
+        <div class="about-story">
+            <div class="story-text">
+                <span class="section-subtitle">WHO WE ARE</span>
+                <h2>We Are More Than Just A Gym</h2>
+                <p>Founded in 2020, Power Gym was built to break the stereotype of traditional fitness centers. We believe fitness is a lifestyle, not a chore. Whether you want to lose weight, build muscle, or improve your mental health, we provide the perfect environment to achieve your goals.</p>
+                <p>Our state-of-the-art facility combines top-tier equipment with an energetic atmosphere that keeps you motivated every single day.</p>
+            </div>
+            <div class="story-image">
+                <div class="image-placeholder">
+                    <!-- Aap chaho toh yahan real image img tag se laga sakte ho -->
+                </div> 
+            </div>
+        </div>
+
+        <!-- Stats Counters -->
+        <div class="about-stats">
+            <div class="stat-card">
+                <h3>10+</h3>
+                <p>Years Experience</p>
+            </div>
+            <div class="stat-card">
+                <h3>15+</h3>
+                <p>Expert Trainers</p>
+            </div>
+            <div class="stat-card">
+                <h3>2,500+</h3>
+                <p>Members Transformed</p>
+            </div>
+            <div class="stat-card">
+                <h3>99%</h3>
+                <p>Satisfaction Rate</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. TRAINERS SECTION -->
+<section id="trainers" class="trainers-section">
+    <div class="trainers-container">
+        <div class="section-header">
+            <span class="section-subtitle">OUR TEAM</span>
+            <h2>Meet Our Expert Trainers</h2>
+            <p>Our certified coaches are here to guide, motivate, and push you past your limits.</p>
+        </div>
+
+        <div class="trainers-grid">
+            <!-- Trainer Card 1 -->
+            <div class="trainer-card">
+                <div class="trainer-img-container">
+                    <!-- Yahan aap real image img tag se laga sakte hain -->
+                    <div class="trainer-img trainer1"></div>
+                    <div class="trainer-socials">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="trainer-info">
+                    <span class="trainer-tag">Bodybuilding</span>
+                    <h3>Alex Hunter</h3>
+                    <p>12+ Years Experience | ISSA Certified</p>
+                </div>
+            </div>
+
+            <!-- Trainer Card 2 -->
+            <div class="trainer-card">
+                <div class="trainer-img-container">
+                    <div class="trainer-img trainer2"></div>
+                    <div class="trainer-socials">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="trainer-info">
+                    <span class="trainer-tag">CrossFit & Strength</span>
+                    <h3>Sarah Jenkins</h3>
+                    <p>8+ Years Experience | CrossFit Level 2</p>
+                </div>
+            </div>
+
+            <!-- Trainer Card 3 -->
+            <div class="trainer-card">
+                <div class="trainer-img-container">
+                    <div class="trainer-img trainer3"></div>
+                    <div class="trainer-socials">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="trainer-info">
+                    <span class="trainer-tag">Weight Loss & Yoga</span>
+                    <h3>Michael Chang</h3>
+                    <p>6+ Years Experience | Nutrition Specialist</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="plans" class="plans-section">
+    <div class="plans-container">
+        <div class="section-header">
+            <span class="section-subtitle">OUR PRICING</span>
+            <h2>Choose Your Membership Plan</h2>
+            <p>No hidden fees. Choose the package that fits your fitness goals and budget.</p>
+        </div>
+
+        <div class="plans-grid">
+            
+            <div class="plan-card">
+                <div class="plan-header">
+                    <h3>BASIC</h3>
+                    <div class="price"><span>$</span>29<span>/mo</span></div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> Standard Gym Floor Access</li>
+                    <li><i class="fa-solid fa-check"></i> Free Locker Rooms</li>
+                    <li><i class="fa-solid fa-check"></i> 1 Free General Coaching Session</li>
+                    <li class="disabled"><i class="fa-solid fa-xmark"></i> Personalized Diet Plans</li>
+                    <li class="disabled"><i class="fa-solid fa-xmark"></i> 1-on-1 Personal Trainer</li>
+                </ul>
+                <div class="plan-footer">
+                    {% if active_plan == "BASIC" %}
+                        <button disabled style="display: block !important; width: 100% !important; box-sizing: border-box !important; padding: 14px !important; background-color: #28a745 !important; color: #ffffff !important; font-weight: bold !important; font-size: 1rem !important; text-align: center !important; text-transform: uppercase !important; border: 2px solid #28a745 !important; border-radius: 4px !important; cursor: not-allowed !important;">
+                            ✔️ CURRENT PLAN
+                        </button>
+                    {% else %}
+                        <a href="/auth/stripe-checkout/basic/29/" 
+                           style="display: block !important; width: 100% !important; box-sizing: border-box !important; padding: 14px !important; background-color: #ffffff !important; color: #000000 !important; font-weight: bold !important; font-size: 1rem !important; text-align: center !important; text-decoration: none !important; text-transform: uppercase !important; border: 2px solid #ffffff !important; border-radius: 4px !important; cursor: pointer !important; visibility: visible !important; opacity: 1 !important; transition: all 0.3s ease;">
+                            CHOOSE PLAN
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="plan-card popular">
+                <div class="popular-badge">MOST POPULAR</div>
+                <div class="plan-header">
+                    <h3>PREMIUM</h3>
+                    <div class="price"><span>$</span>49<span>/mo</span></div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> 24/7 Complete Gym Access</li>
+                    <li><i class="fa-solid fa-check"></i> Premium Locker & Sauna</li>
+                    <li><i class="fa-solid fa-check"></i> Personalized Diet & Nutrition</li>
+                    <li><i class="fa-solid fa-check"></i> Weekly Progress Tracking</li>
+                    <li class="disabled"><i class="fa-solid fa-xmark"></i> 1-on-1 Personal Trainer</li>
+                </ul>
+                <div class="plan-footer">
+                    {% if active_plan == "PREMIUM" %}
+                        <button disabled style="display: block !important; width: 100% !important; box-sizing: border-box !important; padding: 14px !important; background-color: #28a745 !important; color: #ffffff !important; font-weight: bold !important; font-size: 1rem !important; text-align: center !important; text-transform: uppercase !important; border: 2px solid #28a745 !important; border-radius: 4px !important; cursor: not-allowed !important;">
+                            ✔️ CURRENT PLAN
+                        </button>
+                    {% else %}
+                        <a href="/auth/stripe-checkout/premium/49/" 
+                           style="display: block !important; width: 100% !important; box-sizing: border-box !important; padding: 14px !important; background-color: #ffcc00 !important; color: #000000 !important; font-weight: bold !important; font-size: 1rem !important; text-align: center !important; text-decoration: none !important; text-transform: uppercase !important; border: 2px solid #ffcc00 !important; border-radius: 4px !important; cursor: pointer !important; visibility: visible !important; opacity: 1 !important; transition: all 0.3s ease;">
+                            CHOOSE PLAN
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-header">
+                    <h3>VIP ULTIMATE</h3>
+                    <div class="price"><span>$</span>89<span>/mo</span></div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> All Premium Plan Benefits</li>
+                    <li><i class="fa-solid fa-check"></i> Dedicated 1-on-1 Personal Trainer</li>
+                    <li><i class="fa-solid fa-check"></i> Free Gym Merchandise (T-shirt/Shaker)</li>
+                    <li><i class="fa-solid fa-check"></i> Complimentary Supplement Bar</li>
+                    <li><i class="fa-solid fa-check"></i> Access to All Franchise Branches</li>
+                </ul>
+                <div class="plan-footer">
+                    {% if active_plan == "VIP_ULTIMATE" %}
+                        <button disabled style="display: block !important; width: 100% !important; box-sizing: border-box !important; padding: 14px !important; background-color: #28a745 !important; color: #ffffff !important; font-weight: bold !important; font-size: 1rem !important; text-align: center !important; text-transform: uppercase !important; border: 2px solid #28a745 !important; border-radius: 4px !important; cursor: not-allowed !important;">
+                            ✔️ CURRENT PLAN
+                        </button>
+                    {% else %}
+                        <a href="/auth/stripe-checkout/vip_ultimate/89/" 
+                           style="display: block !important; width: 100% !important; box-sizing: border-box !important; padding: 14px !important; background-color: #ffffff !important; color: #000000 !important; font-weight: bold !important; font-size: 1rem !important; text-align: center !important; text-decoration: none !important; text-transform: uppercase !important; border: 2px solid #ffffff !important; border-radius: 4px !important; cursor: pointer !important; visibility: visible !important; opacity: 1 !important; transition: all 0.3s ease;">
+                            CHOOSE PLAN
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="workout-schedule" style="background-color: #1a1a1a; padding: 60px 20px; border-top: 2px solid #333;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+        
+        <div style="text-align: center; margin-bottom: 40px;">
+            <span style="color: #ffcc00; font-size: 0.9rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">WEEKLY ROUTINE</span>
+            <h2 style="color: #fff; font-size: 2.2rem; margin-top: 5px; text-transform: uppercase;">Interactive Workout Planner</h2>
+            <p style="color: #aaa; max-width: 600px; margin: 10px auto 0 auto; font-size: 0.95rem;">
+                Our gym follows a scientifically structured weekly routine. Scan your daily target and hit the floor!
+            </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 100fr)); gap: 20px;">
+            {% for day_plan in workout_schedule %}
+                <div style="background: #222; border-radius: 8px; padding: 20px; border: 1px solid #333; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;" onmouseenter="this.style.transform='translateY(-5px)'" onmouseleave="this.style.transform='translateY(0)'">
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 10px;">
+                        <h3 style="color: #ffcc00; font-size: 1.3rem; margin: 0;">{{ day_plan.day }}</h3>
+                        <span style="background: #333; color: #fff; padding: 5px 10px; font-size: 0.8rem; border-radius: 4px; font-weight: bold; text-transform: uppercase; display: flex; align-items: center; gap: 5px;">
+                            <i class="fa-solid {{ day_plan.icon }}"></i> {{ day_plan.muscle }}
+                        </span>
+                    </div>
+
+                    <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                        {% for exercise in day_plan.exercises %}
+                            <li style="color: #ccc; font-size: 0.95rem; padding: 6px 0; display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-circle-dot" style="color: #ffcc00; font-size: 0.6rem;"></i>
+                                {{ exercise }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<section id="contact" class="contact-section">
+    <div class="contact-container">
+        <div class="section-header">
+            <span class="section-subtitle">GET IN TOUCH</span>
+            <h2>Contact Us</h2>
+            <p>Have questions? Want a free trial pass? Drop us a message or visit us today.</p>
+        </div>
+
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3>Information</h3>
+                
+                <div class="info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>123 Fitness Street, Near Gym Arena, Mumbai, India</p>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <p>+91 98765 43210</p>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <p>info@powergym.com</p>
+                </div>
+
+                <div class="info-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <p><strong>Mon - Sat:</strong> 5:00 AM - 11:00 PM <br><strong>Sun:</strong> 6:00 AM - 1:00 PM</p>
+                </div>
+
+                <div class="map-box">
+                    <p><i class="fa-solid fa-map-location-dot"></i> Google Map Embed Here</p>
+                </div>
+            </div>
+
+           <!-- Form ke thik upar yeh success message block jodein -->
+<div class="contact-form-container">
+    <h3>Send Us A Message</h3>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div style="background-color: #2e7d32; color: white; padding: 10px; margin-bottom: 15px; border-radius: 4px; font-size: 0.9rem;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form action="{% url 'home' %}" method="POST" class="contact-form">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="input-group">
+            <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="input-group">
+            <input type="text" name="subject" placeholder="Subject">
+        </div>
+        <div class="input-group">
+            <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">SUBMIT NOW</button>
+    </form>
+</div>
+
+</div> 
+    </div>
+</section>
+
+
+
+
+<footer class="main-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 POWER GYM. All Rights Reserved.</p>
+        <div class="footer-socials">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </div>
+</footer>
+
+<div id="loginModal" class="modal-overlay">
+    <div class="modal-box">
+        <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
+        <h2>MEMBER LOGIN</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ login_form.as_p }}
+            <button type="submit" name="action_login" class="modal-btn">LOGIN</button>
+        </form>
+        <p class="modal-switch">New to Gym? <a href="#" onclick="switchModal('loginModal', 'signupModal')">Register Here</a></p>
+    </div>
+</div>
+
+
+
+<script>
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    // Hamburger menu toggle (Open/Close)
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Mobile menu drawer ko smoothly close karne ke liye
+    function closeMobileMenu() {
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        if (navLinks) navLinks.classList.remove('active');
+    }
+
+    // Jab kisi link (Home, About, etc.) par click ho, toh menu close ho jaye
+    document.querySelectorAll('#nav-links li a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+    });
+
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        
+        if (themeToggleBtn) {
+            // 1. Page load hote hi check karo ki memory me kya save hai
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(currentTheme);
+
+            // 2. Click karne par toggle karo
+            themeToggleBtn.addEventListener('click', function() {
+                const current = localStorage.getItem('theme') || 'dark';
+                const nextTheme = current === 'dark' ? 'light' : 'dark';
+                
+                localStorage.setItem('theme', nextTheme);
+                applyTheme(nextTheme);
+            });
+        }
+
+        // 3. 🎯 Yeh function sabhi inline styles ko forcefully change karega
+        function applyTheme(theme) {
+            const body = document.body;
+            // Gym ke saare main background wale sections aur cards ko select karein
+            const sections = document.querySelectorAll('section, div[style*="background"], .contact-form-container, .signup-card, .login-card');
+            const texts = document.querySelectorAll('h1, h2, h3, h4, p, span, li a, label');
+
+            if (theme === 'light') {
+                themeToggleBtn.textContent = '☀️';
+                body.style.setProperty('background-color', '#f4f4f4', 'important');
+                body.style.setProperty('color', '#111111', 'important');
+
+                sections.forEach(el => {
+                    el.style.setProperty('background', '#ffffff', 'important');
+                    el.style.setProperty('background-color', '#ffffff', 'important');
+                    el.style.setProperty('color', '#111111', 'important');
+                });
+
+                texts.forEach(t => {
+                    // Jo yellow color ke main headings hain unhe chhodkar baki sab dark gray/black karein
+                    if (t.style.color !== 'rgb(255, 204, 0)' && t.style.color !== '#ffcc00') {
+                        t.style.setProperty('color', '#222222', 'important');
+                    }
+                });
+            } else {
+                // Wapas Dark Mode (Gym ka asli look)
+                themeToggleBtn.textContent = '🌙';
+                body.style.setProperty('background-color', '#0c0c0c', 'important');
+                body.style.setProperty('color', '#ffffff', 'important');
+
+                sections.forEach(el => {
+                    el.style.setProperty('background', '#111111', 'important');
+                    el.style.setProperty('background-color', '#111111', 'important');
+                    el.style.setProperty('color', '#ffffff', 'important');
+                });
+
+                texts.forEach(t => {
+                    if (t.style.color !== 'rgb(255, 204, 0)' && t.style.color !== '#ffcc00') {
+                        t.style.setProperty('color', '#ffffff', 'important');
+                    }
+                });
+            }
+        }
+    });
+
+
+
+
+
+
+
+</script>
+
+{% endblock %} ```
+

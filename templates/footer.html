@@ -1,0 +1,52 @@
+<style>
+    /* Premium Floating Bottom Navbar */
+    .bottom-nav {
+        position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
+        width: 90%; max-width: 400px; background: rgba(20, 20, 20, 0.95);
+        backdrop-filter: blur(10px); display: flex; justify-content: space-between;
+        align-items: center; padding: 12px 25px; border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 999999;
+    }
+    .nav-item { color: #fff; font-size: 22px; text-decoration: none; transition: 0.3s; }
+    .nav-item:hover { color: #ffcc00; }
+    .add-btn {
+        background: #ffcc00; color: #000; width: 50px; height: 50px;
+        border-radius: 50%; display: flex; align-items: center;
+        justify-content: center; font-size: 28px; font-weight: bold;
+        box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3); text-decoration: none;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<nav class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i></a>
+    <a href="{% url 'global_feed' %}" class="nav-item"><i class="fas fa-th-large"></i></a>
+    
+    {% if user.is_authenticated %}
+        <a href="#" onclick="openUploadModal(); return false;" class="add-btn">+</a>
+    {% else %}
+        <a href="{% url 'login' %}" class="add-btn">+</a>
+    {% endif %}
+
+    <a href="{% url 'search_users' %}" class="nav-item"><i class="fas fa-search"></i></a>
+    <a href="{% url 'profile' %}" class="nav-item"><i class="fas fa-user"></i></a>
+</nav>
+
+<div id="upload-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 999999; align-items: center; justify-content: center; padding: 15px;">
+    <form method="POST" action="{% url 'upload_post' %}" enctype="multipart/form-data" style="background:#121212; padding:25px; border-radius:12px; border:1px solid #262626; width: 100%; max-width: 400px; position: relative;">
+        {% csrf_token %}
+        <button type="button" onclick="closeUploadModal()" style="position: absolute; top: 10px; right: 15px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">&times;</button>
+        <h4 style="color:#ffcc00; margin: 0 0 15px 0;">New Progress Post</h4>
+        <input type="file" name="image" accept="image/*" required style="color:#fff; margin-bottom:15px; width: 100%;">
+        <input type="text" name="caption" placeholder="Caption..." required style="width:100%; background:#1c1c1e; color:#fff; border:1px solid #333; padding:12px; border-radius:8px; margin-bottom:15px;">
+        <button type="submit" style="background:#ffcc00; color:#000; border:none; padding:12px; width:100%; font-weight:bold; border-radius:8px; cursor:pointer;">SHARE POST</button>
+    </form>
+</div>
+
+<script>
+    function openUploadModal() { document.getElementById('upload-modal').style.display = 'flex'; }
+    function closeUploadModal() { document.getElementById('upload-modal').style.display = 'none'; }
+    
+</script>

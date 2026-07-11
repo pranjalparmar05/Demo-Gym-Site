@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .signup-wrapper {
+        background: #0c0c0c; 
+        min-height: 85vh; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        color: white;
+        padding: 20px;
+        font-family: 'Poppins', sans-serif;
+    }
+    .signup-card {
+        background: #111; 
+        padding: 40px; 
+        border-radius: 8px; 
+        border-top: 4px solid #ffcc00; 
+        width: 100%; 
+        max-width: 400px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    .signup-card h2 {
+        text-align: center; 
+        color: #ffcc00; 
+        margin-bottom: 25px;
+        font-weight: 700;
+    }
+    /* Django validation text styles */
+    .signup-card form p ul, 
+    .signup-card form .helptext {
+        display: none !important; /* Agar aapko help text dekhna hai toh ise mita sakte hain */
+    }
+    .signup-card form p {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 15px;
+    }
+    .signup-card form input {
+        width: 100%;
+        padding: 10px 12px;
+        background: #222;
+        border: 1px solid #444;
+        color: white;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .signup-card form input:focus {
+        border-color: #ffcc00;
+        outline: none;
+    }
+    .signup-btn {
+        width: 100%; 
+        padding: 12px; 
+        background: #ffcc00; 
+        border: none; 
+        font-weight: bold; 
+        border-radius: 4px; 
+        cursor: pointer; 
+        margin-top: 15px;
+    }
+    /* Error display ke liye styling */
+    .errorlist {
+        color: #ff4444;
+        background: rgba(255, 68, 68, 0.1);
+        padding: 10px;
+        border-radius: 4px;
+        list-style: none;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="signup-wrapper">
+    <div class="signup-card">
+        <h2>CREATE ACCOUNT</h2>
+        
+        <form method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <div class="errorlist">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p>⚠️ {{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {{ form.as_p }}
+            
+            <button type="submit" class="signup-btn">SIGN UP</button>
+        </form>
+        <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #aaa;">
+            Already a member? <a href="{% url 'login' %}" style="color: #ffcc00; text-decoration: none;">Login Here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
