@@ -6,8 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Profile
 
-# 📌 DUMMY STRIPE TEST KEY: Demo aur testing ke liye ye kaam karegi.
-stripe.api_key = "sk_test_51TqEfoCMnJH1aQigOiF8VdbgxqrkqwjKwI1UEY8nFTfPi8iiSb7Khk0DX2YtZ5pWVBpOzYBHIb9IAsPY48nXWeaQ00ev1mo6GP" 
+
 
 # 1. SIGNUP VIEW
 def signup_view(request):

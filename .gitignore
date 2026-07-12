@@ -1,0 +1,17 @@
+# Security: Secret keys
+.env
+
+# Database: Local database file
+db.sqlite3
+
+# Python: Virtual environment
+venv/
+__pycache__/
+
+# Media: Uploaded images/files (Optional, but recommended)
+media/
+
+# OS/IDE junk
+.vscode/
+.DS_Store
+*.pyc
