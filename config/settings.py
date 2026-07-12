@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-@1&vtukl9=xo4#l#4v2d0j+8h-ho%l+@uj)^-kag@hwqko$gn)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -79,6 +79,8 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 
 
+
+
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL'),
@@ -124,11 +126,13 @@ USE_TZ = True
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 import os
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Yeh line Django ko batati hai ki static files kahan dhundni hain
 STATICFILES_DIRS = [
@@ -142,3 +146,7 @@ ALLOWED_HOSTS = ['*']
 
 # settings.py mein ye zaroor add karein
 LOGIN_URL = 'login'
+
+
+
+
