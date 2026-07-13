@@ -7,7 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('gym.urls')),         # Direct root par gym app chalega
     path('auth/', include('users.urls')),   # '/auth/' lagte hi users app chalega
-    path('', include('gym_management.urls')),
+    
 ]
 
 if settings.DEBUG:
