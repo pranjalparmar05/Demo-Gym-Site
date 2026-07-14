@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'gym',
     'accounts',
     'users',
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -147,4 +150,10 @@ LOGIN_URL = 'login'
 
 
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'apna-cloud-name-yahan-dalein',
+    'API_KEY': 'apna-api-key-yahan-dalein',
+    'API_SECRET': 'apna-api-secret-yahan-dalein',
+}
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
