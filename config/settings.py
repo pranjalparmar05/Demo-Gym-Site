@@ -151,9 +151,9 @@ LOGIN_URL = 'login'
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'apna-cloud-name-yahan-dalein',
-    'API_KEY': 'apna-api-key-yahan-dalein',
-    'API_SECRET': 'apna-api-secret-yahan-dalein',
+    'CLOUD_NAME': 'kwqxx8ly',
+    'API_KEY': 817156873629118,
+    'API_SECRET': 'FCB-HIO6fSDYgLyqIi3cENV0_cA',
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
