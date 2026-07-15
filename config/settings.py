@@ -48,9 +48,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -143,7 +143,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # settings.py
 
 # Star '*' allows any device on your local network to connect
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['demo-gym-site.onrender.com']
 
 # settings.py mein ye zaroor add karein
 LOGIN_URL = 'login'
@@ -152,8 +152,10 @@ LOGIN_URL = 'login'
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'kwqxx8ly',
-    'API_KEY': 817156873629118,
+    'API_KEY': '817156873629118',
     'API_SECRET': 'FCB-HIO6fSDYgLyqIi3cENV0_cA',
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
