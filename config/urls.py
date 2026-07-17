@@ -5,8 +5,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('gym.urls')),         # Direct root par gym app chalega
-    path('auth/', include('users.urls')),   # '/auth/' lagte hi users app chalega
-    
-]
-+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('', include('gym.urls')),
+    path('auth/', include('users.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Yeh line yahan honi chahiye
