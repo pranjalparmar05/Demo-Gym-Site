@@ -81,11 +81,11 @@
         <div style="display:flex; align-items:center; gap:25px; padding-bottom: 25px; margin-bottom: 20px; background:#000000; border-bottom: 1px solid #111;">
             
             <div style="position:relative; text-align:center;">
-                {% if profile.profile_pic %}
-                    <img src="{{ profile.profile_pic.url }}" style="width:85px; height:85px; border-radius:50%; object-fit:cover; border:2px solid #ffcc00; padding: 2px;">
-                {% else %}
-                    <div style="width:85px; height:85px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.8rem; color:#ffcc00; border:2px solid #ffcc00;">{{ user.username|slice:":1"|upper }}</div>
-                {% endif %}
+              {% if user.gym_profile.profile_pic %}
+              <img src="{{ user.gym_profile.profile_pic.url }}" style="width:85px; height:85px; border-radius:50%; object-fit:cover; border:2px solid #ffcc00; padding: 2px;">
+              {% else %}
+              <div style="width:85px; height:85px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.8rem; color:#ffcc00; border:2px solid #ffcc00;">{{ user.username|slice:":1"|upper }}</div>
+              {% endif %}
                 
                {% if request.user == user %}
                 <form method="POST" action="/profile/" enctype="multipart/form-data" style="margin-top:6px;">
