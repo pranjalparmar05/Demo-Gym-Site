@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'users',
     'cloudinary_storage',
-    'django.contrib.staticfiles',
+   
     'cloudinary',
 ]
 
