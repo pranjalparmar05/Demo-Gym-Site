@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from cloudinary_storage.storage import MediaCloudinaryStorage
 
 
+
 # 1. Contact Message Model 
 class ContactMessage(models.Model):
     name = models.CharField(max_length=100)
@@ -182,15 +183,17 @@ class FollowSystem(models.Model):
 
 
 
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='gym_profile')
     profile_pic = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
-    active_plan = models.CharField(max_length=50, default='Free') # max_length kar diya
+    active_plan = models.CharField(max_length=50, default='Free')
     
-    # Follower aur Following system ke liye Self-Referential Relationship
+    # Follower aur Following system
     followers = models.ManyToManyField('self', symmetrical=False, related_name='following', blank=True)
     
-    # 🔥 GYM METRICS & PERSONAL RECORDS (PR) BADGES FIELDS ADDED
+    # Gym Metrics
     bench_press = models.IntegerField(default=0)
     squat = models.IntegerField(default=0)
     deadlift = models.IntegerField(default=0)
