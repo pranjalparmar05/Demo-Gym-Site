@@ -39,12 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'gym.apps.GymConfig',      # Yahan sirf ye hona chahiye
-    'accounts.apps.AccountsConfig', # Yahan sirf ye hona chahiye
-    'users.apps.UsersConfig',
+    'gym',
+    'accounts',
+    'users',
     'cloudinary_storage',
     'cloudinary',
 ]
+print(INSTALLED_APPS)
 
 MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
