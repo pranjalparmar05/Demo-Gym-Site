@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'gym',
+    'gym.apps.GymConfig'
     'accounts',
     'users',
     'cloudinary_storage',
