@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 
 # 1. Contact Message Model 
@@ -139,7 +140,8 @@ class GymAttendance(models.Model):
 # --- 📸 INSTAGRAM-STYLE POSTS MODEL ---
 class GymPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
-    image = models.ImageField(upload_to='gym_posts/')
+    # Yahan storage parameter add kiya gaya hai
+    image = models.ImageField(upload_to='gym_posts/', storage=MediaCloudinaryStorage()) 
     caption = models.CharField(max_length=250, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

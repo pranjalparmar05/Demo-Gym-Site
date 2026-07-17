@@ -9,4 +9,4 @@ urlpatterns = [
     path('auth/', include('users.urls')),   # '/auth/' lagte hi users app chalega
     
 ]
-
++ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

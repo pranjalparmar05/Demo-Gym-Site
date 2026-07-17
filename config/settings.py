@@ -38,17 +38,18 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles", # Ye sirf ek baar hona chahiye
+    "django.contrib.staticfiles",
     'gym',
     'accounts',
     'users',
     'cloudinary_storage',
+    'django.contrib.staticfiles',
     'cloudinary',
 ]
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware", # Sirf yahan rakhein
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -138,7 +139,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # settings.py
 
 # Star '*' allows any device on your local network to connect
@@ -149,12 +150,13 @@ LOGIN_URL = 'login'
 
 
 
+# settings.py mein ye confirm karein
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# Cloudinary configuration
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'kwqxx8ly',
     'API_KEY': '817156873629118',
     'API_SECRET': 'FCB-HIO6fSDYgLyqIi3cENV0_cA',
 }
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 
