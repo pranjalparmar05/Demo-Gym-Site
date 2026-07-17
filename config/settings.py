@@ -39,11 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'gym.apps.GymConfig'
-    'accounts',
-    'users',
+    'gym.apps.GymConfig',      # Yahan sirf ye hona chahiye
+    'accounts.apps.AccountsConfig', # Yahan sirf ye hona chahiye
+    'users.apps.UsersConfig',
     'cloudinary_storage',
-   
     'cloudinary',
 ]
 
