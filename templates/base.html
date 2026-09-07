@@ -152,16 +152,17 @@
 {% include 'footer.html' %}
 
 <script>
-    
-    document.getElementById('openModalBtn').addEventListener('click', function() {
-    {% if not user.is_authenticated %}
-        window.location.href = "{% url 'login' %}"; // Login page par bhej do
-    {% else %}
-        // Modal kholne ka logic
-        document.getElementById('myModal').style.display = 'block';
-    {% endif %}
-});
+const openModalBtn = document.getElementById('openModalBtn');
+if (openModalBtn) {
+    openModalBtn.addEventListener('click', function() {
+        {% if not user.is_authenticated %}
+            window.location.href = "{% url 'login' %}";
+        {% else %}
+            const modal = document.getElementById('myModal');
+            if (modal) {
+                modal.style.display = 'block';
+            }
+        {% endif %}
+    });
+}
 </script>
-
-</body>
-</html>
