@@ -82,7 +82,8 @@ def login_view(request):
         'next': request.GET.get('next', '')
     })
 
-# 3. Naya Signup View (Alag Page ke liye)
+
+
 def signup_view(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -91,6 +92,10 @@ def signup_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            
+            # 🚨 YEH LINE ADD KAREIN: User ke bante hi uska profile create ho jayega
+            Profile.objects.get_or_create(user=user)
+            
             login(request, user)
             messages.success(request, "Account created successfully!")
             return redirect('home')
