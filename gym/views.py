@@ -60,28 +60,28 @@ def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            user = form.get_user() # AuthenticationForm se user object mil jata hai
+            user = form.get_user()
             login(request, user)
+            
+            # 🚨 YEH LINE ADD KAREIN: Ensure karein ki login karne wale user ka profile database mein ho
+            Profile.objects.get_or_create(user=user)
+            
             messages.success(request, f"Welcome back, {user.username}!")
             
-            # Yahan se logic shuru hota hai
-            next_url = request.POST.get('next') # Hidden input se value uthao
-            
+            next_url = request.POST.get('next')
             if next_url:
-                return redirect(next_url) # Agar login se pehle kahi aur the, wahan bhej do
+                return redirect(next_url)
             else:
-                return redirect('home')   # Varna home par
+                return redirect('home')
         else:
             messages.error(request, "Invalid username or password.")
     else:
         form = AuthenticationForm()
     
-    # Template mein 'next' variable bhejna zaroori hai
     return render(request, 'login.html', {
         'form': form, 
         'next': request.GET.get('next', '')
     })
-
 
 
 def signup_view(request):
