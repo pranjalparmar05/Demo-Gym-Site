@@ -92,7 +92,7 @@
 
                 
                {% if request.user == user %}
-                <form method="POST" action="/profile/" enctype="multipart/form-data" style="margin-top:6px;">
+                <form method="POST" action="{% url 'profile' %}" enctype="multipart/form-data" style="margin-top:6px;">
                  {% csrf_token %}
                  <label for="p-pic" style="background:#111; color:#ffcc00; padding:2px 8px; border-radius:20px; font-size:0.65rem; cursor:pointer; font-weight:bold;">Edit</label>
                  <input type="file" id="p-pic" name="profile_pic" onchange="this.form.submit()" style="display:none;" accept="image/*">
